@@ -2,7 +2,7 @@ FROM ghcr.io/linuxserver/baseimage-kasmvnc:arch
 
 ARG BUILD_DATE
 ARG VERSION
-LABEL build_version="Docker-winesap version:- ${VERSION} Build-date:- ${BUILD_DATE}"
+LABEL build_version="Docker-winesapos version:- ${VERSION} Build-date:- ${BUILD_DATE}"
 LABEL maintainer="guestsneezeosdev"
 
 # title
