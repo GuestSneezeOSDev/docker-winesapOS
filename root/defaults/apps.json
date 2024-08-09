@@ -1,0 +1,11 @@
+{
+  "env": {
+    "PATH": "$(PATH):$(HOME)/.local/bin"
+  },
+  "apps": [
+    {
+      "name": "winesapOS",
+      "image-path": "winesap.png"
+    }
+  ]
+}
