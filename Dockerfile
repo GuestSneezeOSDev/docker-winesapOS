@@ -127,12 +127,46 @@ RUN \
   lutris-wine-meta && \
   
   pacman -S \
-  steam \
-  lutris \
   flatpak \
-  antimicrox && \
-  echo "***Install Additional packages ... Complete***"
-
+  flatpak install \
+  io.github.antimicrox.antimicrox \
+  com.usebottles.bottles \
+  com.calibre_ebook.calibre \
+  org.gnome.Cheese \
+  com.gitlab.davem.ClamTk \
+  com.discordapp.Discord \
+  org.filezillaproject.Filezilla \
+  com.github.tchx84.Flatseal \
+  org.freedesktop.Platform.VulkanLayer.gamescope \
+  com.google.Chrome \
+  com.heroicgameslauncher.hgl \
+  org.keepassxc.KeePassXC \
+  org.libreoffice.LibreOffice \
+  net.lutris.Lutris \
+  org.freedesktop.Platform.VulkanLayer.MangoHud \
+  com.obsproject.Studio \
+  io.github.peazip.PeaZip \
+  org.prismlauncher.PrismLauncher \
+  com.github.Matoking.protontricks \
+  net.davidotek.pupgui2 \
+  org.qbittorrent.qBittorrent \
+  com.valvesoftware.Steam \
+  com.valvesoftware.Steam.Utility.steamtinkerlaunch \
+  org.videolan.VLC && \
+  echo "***Install Additional packages ... Complete***" && \
+  echo "***Installing Native winesapOS files**" && \
+  file /etc/os-release-winesapos && \
+  touch /etc/os-release-winesapos && \
+  echo "NAME="winesapOS" " >> /etc/os-release-winesapos && \
+  echo "PRETTY_NAME="winesapOS"" >> /etc/os-release-winesapos && \
+  echo "ID=winesapos" >> /etc/os-release-winesapos && \
+  echo "ID_LIKE=arch" >> /etc/os-release-winesapos && \
+  echo "VERSION_ID=4.1.0-beta.3" >> /etc/os-release-winesapos && \
+  echo "HOME_URL="https://github.com/LukeShortCloud/winesapOS" " >> /etc/os-release-winesapos && \
+  echo "SUPPORT_URL="https://github.com/LukeShortCloud/winesapOS/issues"" >> /etc/os-release-winesapos && \
+  echo "BUG_REPORT_URL="https://github.com/LukeShortCloud/winesapOS/issues"" >> /etc/os-release-winesapos && \
+  echo "**Finished Task successfully**" \
+  
 # add local files
 COPY /root /
 
