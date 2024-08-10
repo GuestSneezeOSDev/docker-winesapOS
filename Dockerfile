@@ -1,9 +1,7 @@
 # Use archlinux:latest instead of linuxserver
 FROM archlinux:latest
 #FROM manjaro:latest
-#FROM ekultails/steamos DO NOT USE THIS this gives errors while updating
-#FROM linuxserver/steamos USE this instead this does not give errors while updating
-
+#FROM linuxserver/steamos
 ARG BUILD_DATE
 ARG VERSION
 LABEL build_version="Docker-winesapos version:- ${VERSION} Build-date:- ${BUILD_DATE}"
