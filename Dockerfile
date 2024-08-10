@@ -25,29 +25,27 @@ RUN pacman -Syu --noconfirm && \
     echo '[multilib]' >> /etc/pacman.conf && \
     echo 'Include = /etc/pacman.d/mirrorlist' >> /etc/pacman.conf && \
     pacman -Sy --noconfirm && \
-    echo "**** install packages ****" && \
-    pacman -S --noconfirm \
+    echo "**** install packages ****"
+  RUN pacman -S --noconfirm \
     flatpak \
     firefox \
     nano \
     vi \
     vim \
     bind \
-    yay \
     spice-vdagent && \
+
+    echo "*** install yay ****" && \
+    cd /tmp && \
+    sudo pacman -S --needed base-devel git && \
+    git clone https://aur.archlinux.org/yay.git && \
+    cd yay && \
+    makepkg -si && \
+    cd ~/ && \
     echo "**** install sunshine ****" && \
-    cd /tmp && \
-    git clone https://aur.archlinux.org/sunshine.git && \
-    cd sunshine && \
-    sed -i '/CXXFLAGS/i chown -R 911:1001 \/config' PKGBUILD && \
-    makepkg -sAci --skipinteg --noconfirm && \
-    usermod -G input abc && \
+   yay -S sunchine && \
     echo "**** install fix for games using source engine ****" && \
-    cd /tmp && \
-    git clone https://aur.archlinux.org/lib32-gperftools.git && \
-    cd lib32-gperftools && \
-    makepkg -sAci --skipinteg --noconfirm && \
-    usermod -G input abc && \
+    yay -S lib32-gperftools && \
     echo "**** steam tweaks ****" && \
     sed -i 's/-steamdeck//g' /usr/bin/steam && \
     echo "**** kde tweaks ****" && \
