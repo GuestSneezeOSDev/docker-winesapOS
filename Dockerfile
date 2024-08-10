@@ -1,4 +1,3 @@
-# Use archlinux:latest instead of linuxserver
 FROM archlinux:latest
 #FROM manjaro:latest
 #FROM linuxserver/steamos
