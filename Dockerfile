@@ -1,5 +1,4 @@
 FROM archlinux:latest
-#FROM manjaro:latest
 
 ARG BUILD_DATE
 ARG VERSION
@@ -24,10 +23,9 @@ RUN pacman -Syu --noconfirm && \
     echo '[multilib]' >> /etc/pacman.conf && \
     echo 'Include = /etc/pacman.d/mirrorlist' >> /etc/pacman.conf && \
     pacman -Sy --noconfirm && \
-    echo "**** install packages ****"
-  RUN pacman -S --noconfirm \
+    echo "**** install packages ****" && \
+   pacman -S --noconfirm \
     wget \
-    jdk21-openjdk \
     flatpak \
     firefox \
     nano \
@@ -37,8 +35,7 @@ RUN pacman -Syu --noconfirm && \
     spice-vdagent && \
     echo "*** install yay ****" && \
     wget https://builds.garudalinux.org/repos/chaotic-aur/x86_64/yay-12.3.5-1-x86_64.pkg.tar.zst && \
-     pacman -U yay-12.3.5-1-x86_64.pkg.tar.zst && \
-     rm *.pkg.tar.zst
+    pacman -U yay-12.3.5-1-x86_64.pkg.tar.zst && \
     echo "**** install sunshine ****" && \
    yay -S sunchine && \
     echo "**** install fix for games using source engine ****" && \
