@@ -33,7 +33,6 @@ RUN pacman -Syu --noconfirm && \
     vim \
     bind \
     spice-vdagent && \
-
     echo "*** install yay ****" && \
     wget https://builds.garudalinux.org/repos/chaotic-aur/x86_64/yay-12.3.5-1-x86_64.pkg.tar.zst && \
      pacman -U yay-12.3.5-1-x86_64.pkg.tar.zst && \
