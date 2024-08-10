@@ -37,7 +37,7 @@ RUN pacman -Syu --noconfirm && \
 
     echo "*** install yay ****" && \
     cd /tmp && \
-    sudo pacman -S --needed base-devel git && \
+    pacman -S --needed base-devel git && \
     git clone https://aur.archlinux.org/yay.git && \
     cd yay && \
     makepkg -si && \
