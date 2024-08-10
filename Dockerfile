@@ -1,6 +1,5 @@
 FROM archlinux:latest
 #FROM manjaro:latest
-#FROM linuxserver/steamos:latest
 
 ARG BUILD_DATE
 ARG VERSION
