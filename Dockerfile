@@ -26,6 +26,8 @@ RUN pacman -Syu --noconfirm && \
     pacman -Sy --noconfirm && \
     echo "**** install packages ****"
   RUN pacman -S --noconfirm \
+    wget \
+    jdk21-openjdk \
     flatpak \
     firefox \
     nano \
