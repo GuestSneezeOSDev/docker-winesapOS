@@ -36,12 +36,9 @@ RUN pacman -Syu --noconfirm && \
     spice-vdagent && \
 
     echo "*** install yay ****" && \
-    cd /tmp && \
-    pacman -S --needed base-devel git && \
-    git clone https://aur.archlinux.org/yay.git && \
-    cd yay && \
-    makepkg -si && \
-    cd ~/ && \
+    wget https://builds.garudalinux.org/repos/chaotic-aur/x86_64/yay-12.3.5-1-x86_64.pkg.tar.zst && \
+     pacman -U yay-12.3.5-1-x86_64.pkg.tar.zst && \
+     rm *.pkg.tar.zst
     echo "**** install sunshine ****" && \
    yay -S sunchine && \
     echo "**** install fix for games using source engine ****" && \
