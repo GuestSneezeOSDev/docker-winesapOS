@@ -1,0 +1,12 @@
+- name: Official FOSSA Action
+ on: push
+  jobs:
+  security:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - name: Run Sec1 Scan to check for vulnerabilities
+        uses: sec0ne/actions/security@main
+        with:
+          apikey: ${{ secrets.SEC1_API_KEY }}
+  uses: fossas/fossa-action@v1.4.0

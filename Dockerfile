@@ -1,4 +1,8 @@
-FROM ghcr.io/linuxserver/baseimage-kasmvnc:arch
+# Use archlinux:latest instead of linuxserver
+FROM archlinux:latest
+#FROM manjaro:latest
+#FROM ekultails/steamos DO NOT USE THIS this gives errors while updating
+#FROM linuxserver/steamos USE this instead this does not give errors while updating
 
 ARG BUILD_DATE
 ARG VERSION
@@ -9,27 +13,7 @@ LABEL maintainer="guestsneezeosdev"
 ENV TITLE=winesapOS
 
 RUN \
-  echo "**** install vanilla 32 bit packages from multilib ****" && \
-  echo '[multilib]' >> /etc/pacman.conf && \
-  echo 'Include = /etc/pacman.d/mirrorlist' >> /etc/pacman.conf && \
-  pacman -Sy --noconfirm --needed \
-    lib32-amdvlk \
-    lib32-glibc \
-    lib32-libva-intel-driver \
-    lib32-libva-mesa-driver \
-    lib32-libva-vdpau-driver \
-    lib32-libvdpau \
-    lib32-mangohud \
-    lib32-mesa-utils \
-    lib32-mesa-vdpau \
-    lib32-vulkan-intel \
-    lib32-vulkan-mesa-layers \
-    lib32-vulkan-radeon \
-    lib32-vulkan-swrast \
-    libva-intel-driver \
-    libva-utils \
-    mesa-vdpau \
-    vulkan-swrast && \
+pacman -S -y -u --noconfirm && \
   echo "**** add winesapos repos ****" && \
   echo '[jupiter-staging]' >> /etc/pacman.conf && \
   echo 'Server = https://steamdeck-packages.steamos.cloud/archlinux-mirror/$repo/os/$arch' >> /etc/pacman.conf && \
@@ -40,43 +24,20 @@ RUN \
   echo `[winesapos]` >> /etc/pacman.conf && \
   echo `Server = https://winesapos.lukeshort.cloud/repo/winesapos/$arch/` >> /etc/pacman.conf && \
   echo `SigLevel = Never` >> /etc/pacman.conf && \
+  echo '[multilib]' >> /etc/pacman.conf && \
+  echo 'Include = /etc/pacman.d/mirrorlist' >> /etc/pacman.conf && \
+  pacman -Sy --noconfirm --needed \
   pacman -Syyu --noconfirm && \
   echo "**** install packages ****" && \
   pacman -Sy --noconfirm --needed \
-    boost-libs \
-    dmidecode \
-    dolphin \
-    firefox \
-    fuse2 \
-    gamescope \
-    git \
-    gperftools \
-    jq \
-    kate \
-    konsole \
-    lib32-gamescope \
-    lib32-gcc-libs \
-    lib32-libpulse \
-    lib32-libunwind \
-    lib32-mesa-vdpau \
-    lib32-opencl-mesa \
-    lib32-renderdoc-minimal \
-    mangohud \
-    noto-fonts-cjk \
-    plasma-desktop \
-    sddm-wayland \
-    steamdeck-kde-presets \
-    steam-jupiter-stable \
-    steamos-customizations \
-    unzip \
-    xdg-user-dirs \
-    xorg-xwayland \
-    zenity \
-    nano \
-    vi \
-    vim \
-    clamtk \
-    spice-vdagent && \
+  flatpak \
+  firefox \
+  nano \
+  vi \
+  vim \
+  bind \
+  yay   \
+  spice-vdagent && \
   echo "**** install sunshine ****" && \
   cd /tmp && \
   git clone https://aur.archlinux.org/sunshine.git && \
@@ -165,7 +126,38 @@ RUN \
   echo "HOME_URL="https://github.com/LukeShortCloud/winesapOS" " >> /etc/os-release-winesapos && \
   echo "SUPPORT_URL="https://github.com/LukeShortCloud/winesapOS/issues"" >> /etc/os-release-winesapos && \
   echo "BUG_REPORT_URL="https://github.com/LukeShortCloud/winesapOS/issues"" >> /etc/os-release-winesapos && \
+  wget https://winesapos.lukeshort.cloud/repo/iso/winesapos-4.1.0/_test/winesapos-4.1.0-beta.1-minimal-rootfs.tar.zst && \
+  pacman --noconfirm -U winesapos-4.1.0-beta.1-minimal-rootfs.tar.zst && \
+  pacman-key --init && \
+  pacman-key --recv-keys 1805E886BECCCEA99EDF55F081CA29E4A4B01239 && \
+  pacman-key --init && \
+  pacman-key --lsign-key 1805E886BECCCEA99EDF55F081CA29E4A4B01239 && \
+  wget 'https://cdn-mirror.chaotic.cx/chaotic-aur/chaotic-keyring.pkg.tar.zst' && \
+  pacman --noconfirm -U /chaotic-keyring.pkg.tar.zst && \
+  wget 'https://cdn-mirror.chaotic.cx/chaotic-aur/chaotic-mirrorlist.pkg.tar.zst' && \
+  pacman --noconfirm -U chaotic-mirrorlist.pkg.tar.zst && \
+  rm *.pkg.tar.zst
+  pacman --noconfirm -S \
+  mesa \
+  libva-mesa-driver \
+  mesa-vdpau \
+  opencl-rusticl-mesa \
+  vulkan-intel \
+  vulkan-mesa-layers \
+  vulkan-nouveau \
+  vulkan-radeon \
+  vulkan-swrast \
+  lib32-mesa \
+  lib32-libva-mesa-driver \
+  lib32-mesa-vdpau \
+  lib32-vulkan-nouveau \
+  lib32-opencl-rusticl-mesa \
+  lib32-vulkan-intel \
+  lib32-vulkan-mesa-layers \
+  lib32-vulkan-radeon \
+  lib32-vulkan-swrast && \
   echo "**Finished Task successfully**" \
+  
   
 # add local files
 COPY /root /
